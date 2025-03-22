@@ -10,7 +10,7 @@ class Person():
         self.first_name = first_name
         self.last_name = last_name
         self.dob = dob
-        self.status =  status
+        self.status =  status.alive
 
     def update_first_name(self, name: str):
         self.first_name = name
@@ -43,8 +43,17 @@ class StupperStudents(Student):
 
 class Classroom():
     def __init__(self):
-        pass
-        
+        self.students: dict[Student.student_id, Student] = dict()
+        self.instructors: dict[Instructor.instructor_id, Instructor] = dict()
+
+    def add_instructor(self, instructor: Instructor):
+        self.instructor[Instructor.instructor_id] = instructor
+
+    def remove_instructor(self, instructor: Instructor):
+        self.instructors = {y: x for y, x in self.instructors.items() if x != instructor}
+
+    def add_student(self, student: Student):
+        self.students[student.student_id] = student
 
         
        
