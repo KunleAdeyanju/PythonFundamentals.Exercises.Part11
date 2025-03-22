@@ -30,10 +30,16 @@ class Instructor(Person):
         super().__init__(first_name, last_name, dob, Alive_status)
         self.instructor_id = "Instructor_" + str(uuid.uuid4())
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class Student(Person):
     def __init__(self, first_name, last_name, dob,  Alive_status):
         super().__init__(first_name, last_name, dob, Alive_status)
         self.student_id = "Student_" + str(uuid.uuid4())
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class ZipCodeStudent(Student):
     pass
@@ -59,10 +65,10 @@ class Classroom():
         self.students = {y: x for y, x in self.students.items() if x != student}
     
     def print_instructors(self):
-        print(self.instructors)
+        [print(f" {key}: {value}") for key, value in self.instructors.items()]
 
     def print_students(self):
-        print(self.students)
+        [print(f" {key}: {value}") for key, value in self.students.items()]
 
 
         
