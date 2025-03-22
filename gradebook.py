@@ -6,11 +6,11 @@ class Alive_status(Enum):
     deceased = 0
 
 class Person():
-    def __init__(self, first_name, last_name, dob, status: Alive_status):
+    def __init__(self, first_name, last_name, dob,  Alive_status):
         self.first_name = first_name
         self.last_name = last_name
         self.dob = dob
-        self.status =  status.alive
+        self.status =  Alive_status.alive
 
     def update_first_name(self, name: str):
         self.first_name = name
@@ -26,13 +26,13 @@ class Person():
 
 
 class Instructor(Person):
-    def __init__(self, first_name, last_name, dob, status: Alive_status):
-        super().__init__(first_name, last_name, dob, status: Alive_status)
+    def __init__(self, first_name, last_name, dob, Alive_status):
+        super().__init__(first_name, last_name, dob, Alive_status)
         self.instructor_id = "Instructor_" + str(uuid.uuid4())
 
 class Student(Person):
-    def __init__(self, first_name, last_name, dob, status: Alive_status):
-        super().__init__(first_name, last_name, dob, status: Alive_status)
+    def __init__(self, first_name, last_name, dob,  Alive_status):
+        super().__init__(first_name, last_name, dob, Alive_status)
         self.student_id = "Student_" + str(uuid.uuid4())
 
 class ZipCodeStudent(Student):
@@ -47,13 +47,23 @@ class Classroom():
         self.instructors: dict[Instructor.instructor_id, Instructor] = dict()
 
     def add_instructor(self, instructor: Instructor):
-        self.instructor[Instructor.instructor_id] = instructor
+        self.instructors[instructor.instructor_id] = instructor
 
-    def remove_instructor(self, instructor: Instructor):
+    def remove_instructor(self, instructor: Person):
         self.instructors = {y: x for y, x in self.instructors.items() if x != instructor}
 
     def add_student(self, student: Student):
         self.students[student.student_id] = student
+
+    def remove_student(self, student:Student):
+        self.students = {y: x for y, x in self.students.items() if x != student}
+    
+    def print_instructors(self):
+        print(self.instructors)
+
+    def print_students(self):
+        print(self.students)
+
 
         
        
